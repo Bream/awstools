@@ -1,0 +1,12 @@
+FROM ubuntu:16.04
+
+RUN apt-get update && \
+    apt-get install -y python3 python3-boto python3-pip libssl-dev
+
+ADD requirements.txt /
+RUN pip3 install -r /requirements.txt
+
+ADD . /auto-shutdown
+
+WORKDIR /auto-shutdown
+CMD [ "python3", "auto-shutdown.py" ]
